@@ -1,2 +1,2 @@
 # simpleml-
-Customize python packages to enable automation 
+Customize python packages to enable ML automation 
