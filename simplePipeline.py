@@ -41,36 +41,36 @@ class DropColumn(BaseEstimator,  TransformerMixin):
         return x.drop(axis = 1, columns = self.drop_)
 
 
-def num_scaler_pipeline():
+def num_scaler_pipeline(feat):
     """
     :return: Numerical pipeline with standardize continuous variables.
     """
     return Pipeline([
-                    ('selector', FeatureSelector()),
+                    ('selector', FeatureSelector(features=feat)),
                     ('column', DropColumn()),
                     ('Impute', SimpleImputer(strategy= 'mean')),
                     ('scaler', StandardScaler())
                     ])
 
 
-def num_sparse_pipeline():
+def num_sparse_pipeline(feat):
     """
     :return: Numerical pipeline with normalize continuous variables.
     """
     return Pipeline([
-                    ('selector', FeatureSelector()),
+                    ('selector', FeatureSelector(features=feat)),
                     ('column', DropColumn()),
                     ('Impute', SimpleImputer(strategy= 'mean')),
                     ('scaler', MinMaxScaler())
                     ])
 
 
-def cat_encoder_pipeline():
+def cat_encoder_pipeline(feat):
     """
     :return: Pipeline for categorical features.
     """
     return Pipeline([
-                    ('selector', FeatureSelector()),
+                    ('selector', FeatureSelector(features=feat)),
                     ('column', DropColumn()),
                     ('Impute', SimpleImputer(strategy= 'most_frequent')),
                     ('Ordinal', OrdinalEncoder()),
