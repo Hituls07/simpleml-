@@ -17,12 +17,12 @@ def plotLearningCurve(estimator, feat, tar, classification=True):
     train_feat, val_feat, train_tar, val_tar = train_test_split(feat, tar, test_size=0.2)  # Split into validation
     m = len(train_tar)
     train_score, val_score = [], []
-    points = list(np.linspace(1, m, 10, dtype=np.int64))
+    points = list(np.linspace(3, m, 10, dtype=np.int64))
 
     for row in points:
         estimator.fit(train_feat[:row], train_tar[:row])  # fitting model here
         train_predict = estimator.predict(train_feat[:row])
-        val_predict = estimator.predict(val_feat)
+        val_predict = estimator.predict(sval_feat)
         if classification:
             # Training Accuracy
             train_accuracy = accuracy_score(train_tar[:row], train_predict)
