@@ -158,3 +158,20 @@ class feature_selection_class(feature_selection):
         score = model.scores_  / model.scores_.max(axis = 0)
         self.score__['f_chi2'] = score
         self.model_support__['f_chi2'] = model.get_support()
+
+
+def featSelect_Regression(feat, target):
+    """
+    Automated Feature Selection for Regression Model
+    :param feat: Training Features
+    :param target: Training Target
+    :return: list True or False for columns. True means imporatant and False means not important column
+    """
+    fs = feature_selection_reg(feat, target)
+    fs.f_reg()
+    fs.f_lasso()
+    fs.f_mutInfo()
+    fs.f_randForest()
+    fs.plot_comparison()
+    return fs.ensemble_selection()
+
